@@ -1,0 +1,47 @@
+<div class="container">
+  <mat-card class="login-card">
+    <div class="mat-title">Login</div>
+    <br>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div>
+        <mat-form-field class="login-full-width">
+          <mat-label for="user">User</mat-label>
+          <input matInput formControlName="user" type="text" id="user" />
+        </mat-form-field>
+        <div  class="mat-small"
+          *ngIf="loginForm.get('user').errors && loginForm.get('user').touched"
+        >
+          User is requited
+        </div>
+      </div>
+      <div>
+        <mat-form-field class="login-full-width">
+          <mat-label for="password">Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            type="password"
+            id="password"
+          />
+        </mat-form-field>
+        <div class="mat-small"
+          *ngIf="
+            loginForm.get('password').errors &&
+            loginForm.get('password').touched
+          "
+        >
+          Password is requited
+        </div>
+      </div>
+      <br>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="loginForm.invalid"
+        type="submit"
+      >
+        Ingresar
+      </button>
+    </form>
+  </mat-card>
+</div>
