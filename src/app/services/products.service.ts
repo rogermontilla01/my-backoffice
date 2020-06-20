@@ -23,4 +23,12 @@ export class ProductsService {
       },
     });
   }
+
+  getAllProducts() {
+    return this.http.get(environment.endpoint + '/products', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+  }
 }

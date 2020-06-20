@@ -4,9 +4,13 @@
     text-align: center;
   }
   
-  .container {
-    height: 30rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.container {
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 250px;
+}

@@ -12,7 +12,7 @@ export class NavbarComponent implements OnDestroy {
 
   fillerNav = [
     {path:"/", name:"Home"},
-    {path:"/products", name:"Products"},
+    {path:"/list-products", name:"Products"},
     {path:"/register-staff", name:"Staff Register"},
     {path:"/view-staff", name:"Staff List"},
     {path:"/create-products", name:"Product Register"},
