@@ -17,8 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginComponent } from './login/login.component';
-import { RegisterStaffComponent } from './register-staff/register-staff.component';
-import { ViewStaffComponent } from './view-staff/view-staff.component';
+import { RegisterStaffComponent } from './staff/register-staff/register-staff.component';
+import { ViewStaffComponent } from './staff/view-staff/view-staff.component';
+import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ViewStaffComponent } from './view-staff/view-staff.component';
     LoginComponent,
     RegisterStaffComponent,
     ViewStaffComponent,
+    EditStaffComponent,
   ],
   imports: [
     BrowserModule,
