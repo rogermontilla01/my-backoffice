@@ -15,7 +15,7 @@ export class NavbarComponent implements OnDestroy {
     {path:"/products", name:"Products"},
     {path:"/register-staff", name:"Staff Register"},
     {path:"/view-staff", name:"Staff List"},
-    {path:"/product-register", name:"Product Register"},
+    {path:"/create-products", name:"Product Register"},
   ];
 
   private _mobileQueryListener: () => void;

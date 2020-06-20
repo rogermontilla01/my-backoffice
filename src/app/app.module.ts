@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterStaffComponent } from './staff/register-staff/register-staff.component';
 import { ViewStaffComponent } from './staff/view-staff/view-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
+import { CreateProductsComponent } from './products/create-products/create-products.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
     RegisterStaffComponent,
     ViewStaffComponent,
     EditStaffComponent,
+    CreateProductsComponent,
   ],
   imports: [
     BrowserModule,
