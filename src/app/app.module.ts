@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginComponent } from './login/login.component';
 import { RegisterStaffComponent } from './register-staff/register-staff.component';
 import { ViewStaffComponent } from './view-staff/view-staff.component';
@@ -41,6 +42,7 @@ import { ViewStaffComponent } from './view-staff/view-staff.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule
     
