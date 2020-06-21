@@ -1,49 +1,68 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductsService  } from '../../services/products.service';
+import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.css']
+  styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit {
+  ColumnMode = ColumnMode;
+  rows: any[] = [];
+  columns = [];
+  page = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 20,
+  };
 
   productsData: any;
-  displayedColumns: string[] = ['name', 'sku', 'description', 'price', 'offert', 'quantity', 'subcategory', 'featured', 'options'];
-  dataSource: MatTableDataSource<prodElement>;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private ProductsService:ProductsService, private route: Router) {}
-
-  deleteStaff(){
-
+  constructor(private ProductsService: ProductsService, private route: Router) {
+    this.page['pageNumber'] = 0;
+    this.page['size'] = 20;
+    this.columns = [
+      { name: 'Name' },
+      { name: 'SKU' },
+      { name: 'Description' },
+      { name: 'Price' },
+      { name: 'Offert' },
+      { name: 'Quantity' },
+      { name: 'Subcategory', prop: 'subcategory.subname' },
+      { name: 'Featured' },
+    ];
   }
 
-  // deleteStaff(data) {
-  //   this.ProductsService.delete(data).subscribe((data) => {
-  //     console.log(data);
-  //     //Solicitar datos de nuevo:
-  //     this.ProductsService.getAllStaff().subscribe((data) => {
-  //       console.log(data);
-  //       this.productsData = data['data'];
-  //       this.dataSource = new MatTableDataSource(this.productsData);
-  //       this.dataSource.paginator = this.paginator;
-  //     });
-  //   });
-  // }
-
-  ngOnInit(): void {
-    this.ProductsService.getAllProducts().subscribe((data) => {
+  setPage(pageInfo) {
+    this.ProductsService.getAllProducts(pageInfo).subscribe((data) => {
       console.log(data);
-      this.productsData = data['docs'];
-      this.dataSource = new MatTableDataSource(this.productsData);
-      this.dataSource.paginator = this.paginator;
+      //REgistros de productos (Informacion)
+      this.rows = data['docs'];
+      console.log(this.rows);
+      //Cantidad total de productos
+      this.page['totalElements'] = data['totalDocs'];
+      //Cantidad de registros por pagina
+      this.page['size'] = data['limit'];
+      //La pagina que estoy consultando
+      this.page['pageNumber'] = pageInfo['offset'];
+      console.log(this.page);
     });
   }
 
+   //falta terminar
+  deleteProd(id) {
+    this.ProductsService.deleteProducts(id).subscribe(data=>{
+      console.log(data);
+      this.setPage({ offset: 0 });
+
+    })
+  }
+
+  ngOnInit(): void {
+    this.setPage({ offset: 0 });
+  }
 }
 
 export interface prodElement {

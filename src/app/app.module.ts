@@ -22,6 +22,8 @@ import { ViewStaffComponent } from './staff/view-staff/view-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { CreateProductsComponent } from './products/create-products/create-products.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { ProductsListComponent } from './products/products-list/products-list.co
     MatListModule,
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDatatableModule,
     
   ],
   providers: [],

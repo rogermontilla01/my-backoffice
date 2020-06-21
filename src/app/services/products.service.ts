@@ -24,8 +24,21 @@ export class ProductsService {
     });
   }
 
-  getAllProducts() {
-    return this.http.get(environment.endpoint + '/products', {
+  getAllProducts(pageInfo=null) {
+    let query='';
+    //PageInfo en offset recibe pagina -1, cuando consulta a express lo envia por query string
+    if(pageInfo){
+      query='?page='+(pageInfo["offset"]+1)
+    }
+    return this.http.get(environment.endpoint + '/products/'+query, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+  }
+
+  deleteProducts(id) {
+    return this.http.delete(environment.endpoint + '/products/delete-product/' + id, {
       headers: {
         'x-access-token': localStorage.getItem('token'),
       },
