@@ -22,7 +22,8 @@ import { ViewStaffComponent } from './staff/view-staff/view-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { CreateProductsComponent } from './products/create-products/create-products.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ProductsEditComponent } from './products/products-edit/products-edit.component'
 
 
 
@@ -36,6 +37,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable'
     EditStaffComponent,
     CreateProductsComponent,
     ProductsListComponent,
+    ProductsEditComponent,
   ],
   imports: [
     BrowserModule,

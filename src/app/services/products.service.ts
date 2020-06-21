@@ -16,8 +16,24 @@ export class ProductsService {
     });
   }
 
+  updateProd(id, data) {
+    return this.http.put(environment.endpoint + '/products/'+id, data, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+  }
+
   getSubCategories() {
     return this.http.get(environment.endpoint + '/subcategory/list', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+  }
+
+  getProdById(id){
+    return this.http.get(environment.endpoint + '/products/' + id, {
       headers: {
         'x-access-token': localStorage.getItem('token'),
       },
