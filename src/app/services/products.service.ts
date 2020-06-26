@@ -60,4 +60,8 @@ export class ProductsService {
       },
     });
   }
+
+  /* Category Methods */
+
+  
 }

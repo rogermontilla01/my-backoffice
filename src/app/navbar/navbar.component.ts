@@ -1,5 +1,7 @@
-import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { element } from 'protractor';
+
 
 /** @title Responsive sidenav */
 @Component({
@@ -9,14 +11,28 @@ import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 })
 export class NavbarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
-
-  fillerNav = [
-    {path:"/", name:"Home"},
-    {path:"/list-products", name:"Products"},
-    {path:"/register-staff", name:"Staff Register"},
-    {path:"/view-staff", name:"Staff List"},
-    {path:"/create-products", name:"Product Register"},
+  staticNav = [
+    { path: '/', name: 'Home' },
   ];
+  expanNav = [
+    {
+      category: 'Products',
+      expaded: false,
+      datos: [
+        { path: '/list-products', name: 'List' },
+        { path: '/create-products', name: 'Register' },
+      ],
+    },
+    {
+      category: 'Staff',
+      expaded: false,
+      datos: [
+        { path: '/register-staff', name: 'Staff Register' },
+        { path: '/view-staff', name: 'Staff List' },
+      ],
+    },
+  ];
+  
 
   private _mobileQueryListener: () => void;
 
@@ -30,5 +46,17 @@ export class NavbarComponent implements OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
+  open(category){
+    this.expanNav.forEach(element => {
+      if(element.category == category && element.expaded == false){
+          element.expaded = true
+      }else{
+        element.expaded = false
+      }
+    });
+  }
+
   shouldRun = true;
 }
+
+

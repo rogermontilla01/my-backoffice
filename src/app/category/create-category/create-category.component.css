@@ -1,0 +1,27 @@
+.container {
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-card {
+  width: 400px;
+  margin: 10px 10px;
+  text-align: center;
+}
+
+mat-form-field {
+  width: 300px;
+}
+
+@media screen and (max-width: 800px){
+  .container {
+    height: 20rem;
+    display: grid;
+    justify-content: center;
+  }
+  
+}
+
+

@@ -8,6 +8,14 @@
   right: 0;
 }
 
+mat-sidenav{
+  background: #EEEEEE;
+}
+
+mat-expansion-panel{
+  border-radius: 0%;
+}
+
 .navbar-is-mobile .navbar-toolbar {
   position: fixed;
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
@@ -38,4 +46,21 @@ mat-toolbar {
 a {
   text-align: left;
   display: block;
+}
+
+.principal-btn{
+  text-align: left;
+  display: block;
+  width: 100%;
+}
+
+.list-button{
+  text-align: left;
+  font-weight: 500;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 13px;
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 0%;
 }

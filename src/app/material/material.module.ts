@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -29,6 +30,7 @@ const MaterialComponents = [
   MatSelectModule,
   MatRadioModule,
   MatCheckboxModule,
+  MatExpansionModule,
 ];
 
 @NgModule({
