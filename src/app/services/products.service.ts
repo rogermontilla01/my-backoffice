@@ -86,5 +86,21 @@ export class ProductsService {
       },
     });
   }
+
+  deleteCategory(id){
+    return this.http.delete(environment.endpoint+ '/category/delete/'+id, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
+
+  deleteSubCategory(id){
+    return this.http.delete(environment.endpoint+ '/subcategory/delete/'+id, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
   
 }

@@ -36,6 +36,7 @@ export class NavbarComponent implements OnDestroy {
       expaded: false,
       datos: [
         { path: '/create-category', name: 'Category Create' },
+        { path: '/view-category', name: 'Category Views' },
       ],
     },
   ];

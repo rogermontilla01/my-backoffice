@@ -24,7 +24,8 @@ import { CreateProductsComponent } from './products/create-products/create-produ
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProductsEditComponent } from './products/products-edit/products-edit.component';
-import { CreateCategoryComponent } from './category/create-category/create-category.component'
+import { CreateCategoryComponent } from './category/create-category/create-category.component';
+import { ViewCategoryComponent } from './category/view-category/view-category.component'
 
 
 
@@ -40,6 +41,7 @@ import { CreateCategoryComponent } from './category/create-category/create-categ
     ProductsListComponent,
     ProductsEditComponent,
     CreateCategoryComponent,
+    ViewCategoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,43 @@
+<div class="container">
+    <ngx-datatable
+      class="material"
+      [columnMode]="ColumnMode.flex"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      rowHeight="auto"
+      [treeFromRelation]="'parent._id'"
+      [treeToRelation]="'_id'"
+      [rows]="rows"
+      (treeAction)="onTreeAction($event)"
+    >
+      <ngx-datatable-column name="Name" [flexGrow]="3" [isTreeColumn]="true">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Description" [flexGrow]="1">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{ value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Parent" [flexGrow]="1">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value.name }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Options" [flexGrow]="1" prop="">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <button mat-icon-button (click)="deleteCategory(value._id, value)">
+              <mat-icon>
+                delete
+              </mat-icon>
+            </button>
+            <button mat-icon-button routerLink="/products-edit/{{value}}">
+              <mat-icon>
+                create
+              </mat-icon>
+            </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>

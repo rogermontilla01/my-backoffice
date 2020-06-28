@@ -8,6 +8,7 @@ import { CreateProductsComponent } from './products/create-products/create-produ
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { ProductsEditComponent } from './products/products-edit/products-edit.component';
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
+import { ViewCategoryComponent } from './category/view-category/view-category.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'create-products', component: CreateProductsComponent },
   { path: 'list-products', component: ProductsListComponent },
   { path: 'products-edit/:id', component: ProductsEditComponent },
-  { path: 'create-category', component: CreateCategoryComponent }
+  { path: 'create-category', component: CreateCategoryComponent },
+  { path: 'view-category', component: ViewCategoryComponent },
 ];
 
 @NgModule({

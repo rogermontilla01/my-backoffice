@@ -1,0 +1,31 @@
+.icon {
+  height: 10px;
+  width: 10px;
+}
+.disabled {
+  opacity: 0.5;
+}
+
+.container{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.mat-title{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+
+.center-table{
+  margin: auto;
+}
+
+button{
+  margin-right: 1rem;
+}
+
+table {
+  width: 100%;
+}
