@@ -31,6 +31,13 @@ export class NavbarComponent implements OnDestroy {
         { path: '/view-staff', name: 'Staff List' },
       ],
     },
+    {
+      category: 'Category',
+      expaded: false,
+      datos: [
+        { path: '/create-category', name: 'Category Create' },
+      ],
+    },
   ];
   
 

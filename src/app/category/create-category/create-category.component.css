@@ -8,6 +8,7 @@
 .category-card {
   width: 400px;
   margin: 10px 10px;
+  margin-bottom: auto;
   text-align: center;
 }
 

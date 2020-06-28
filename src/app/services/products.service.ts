@@ -24,14 +24,6 @@ export class ProductsService {
     });
   }
 
-  getSubCategories() {
-    return this.http.get(environment.endpoint + '/subcategory/list', {
-      headers: {
-        'x-access-token': localStorage.getItem('token'),
-      },
-    });
-  }
-
   getProdById(id){
     return this.http.get(environment.endpoint + '/products/' + id, {
       headers: {
@@ -63,5 +55,36 @@ export class ProductsService {
 
   /* Category Methods */
 
+  createCategory(data){
+    return this.http.post(environment.endpoint+'/category/create', data, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
+
+  createSubCategory(data){
+    return this.http.post(environment.endpoint+'/subcategory/create-subcategory', data, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
+
+  getSubCategories() {
+    return this.http.get(environment.endpoint + '/subcategory/list', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+  }
+
+  getCategories() {
+    return this.http.get(environment.endpoint + '/category/list', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+  }
   
 }

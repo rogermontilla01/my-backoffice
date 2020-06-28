@@ -10,23 +10,30 @@ import { Router } from '@angular/router';
 })
 export class CreateCategoryComponent implements OnInit {
 
-  subcategoryData;
+  categoryData;
   categoryForm: FormGroup;
+  subCategoryForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private prodCreate: ProductsService,
+    private categoryService: ProductsService,
     private route: Router
   ) {
     this.categoryForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
+      category: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', Validators.required],
     });
+
+    this.subCategoryForm = this.fb.group({
+      subname: ['', [Validators.required, Validators.minLength(4)]],
+      description: ['', Validators.required],
+      parent: ['', Validators.required],
+    })
   }
 
-  register() {
+  createCategory() {
     console.log(this.categoryForm.value);
     //Ejemplo con error en observable
-    this.prodCreate.createProd(this.categoryForm.value).subscribe(
+    this.categoryService.createCategory(this.categoryForm.value).subscribe(
       (data) => {
         //Salio todo bien
         console.log(data);
@@ -39,10 +46,26 @@ export class CreateCategoryComponent implements OnInit {
     );
   }
 
+  createSubCategory() {
+    console.log(this.subCategoryForm.value);
+    //Ejemplo con error en observable
+    this.categoryService.createSubCategory(this.subCategoryForm.value).subscribe(
+      (data) => {
+        //Salio todo bien
+        console.log(data);
+        this.subCategoryForm.reset()
+      },
+      (err) => {
+        //en caso de error
+        alert(err.error.msg);
+      }
+    );
+  }
+
   ngOnInit(): void {
-    this.prodCreate.getSubCategories().subscribe(data=>{
+    this.categoryService.getCategories().subscribe(data=>{
       console.log(data)
-      this.subcategoryData = data
+      this.categoryData = data
     })
   }
 

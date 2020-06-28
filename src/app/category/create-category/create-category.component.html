@@ -2,16 +2,16 @@
   <mat-card class="category-card">
     <div class="mat-title">Create New Category</div>
     <br />
-    <form [formGroup]="categoryForm" (ngSubmit)="register()">
+    <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
       <div>
         <mat-form-field class="login-full-width">
-          <mat-label for="name">Name</mat-label>
-          <input matInput formControlName="name" type="text" id="name" />
+          <mat-label for="category">Name</mat-label>
+          <input matInput formControlName="category" type="text" id="category" />
         </mat-form-field>
         <div
           class="mat-small"
           *ngIf="
-            categoryForm.get('name').errors && categoryForm.get('name').touched
+            categoryForm.get('category').errors && categoryForm.get('category').touched
           "
         >
           Name is requited
@@ -51,19 +51,43 @@
   <mat-card class="category-card">
     <div class="mat-title">Create New Subcategory</div>
     <br />
-    <form [formGroup]="categoryForm" (ngSubmit)="register()">
+    <form [formGroup]="subCategoryForm" (ngSubmit)="createSubCategory()">
       <div>
         <mat-form-field class="login-full-width">
-          <mat-label for="name">Name</mat-label>
-          <input matInput formControlName="name" type="text" id="name" />
+          <mat-label for="parent">Select a Parent</mat-label>
+          <mat-select
+            matInput
+            formControlName="parent"
+            type="parent"
+            id="parent"
+          >
+            <mat-option *ngFor="let item of categoryData" value={{item._id}}>{{
+              item.name
+            }}</mat-option>
+          </mat-select>
         </mat-form-field>
         <div
           class="mat-small"
           *ngIf="
-            categoryForm.get('name').errors && categoryForm.get('name').touched
+            subCategoryForm.get('parent').errors &&
+            subCategoryForm.get('parent').touched
           "
         >
-          Name is requited
+          Parent Category is requited
+        </div>
+      </div>
+      <div>
+        <mat-form-field class="login-full-width">
+          <mat-label for="subname">Name</mat-label>
+          <input matInput formControlName="subname" type="text" id="subname" />
+        </mat-form-field>
+        <div
+          class="mat-small"
+          *ngIf="
+            subCategoryForm.get('subname').errors && subCategoryForm.get('subname').touched
+          "
+        >
+          Subcategory name is requited
         </div>
       </div>
       <div>
@@ -79,8 +103,8 @@
         <div
           class="mat-small"
           *ngIf="
-            categoryForm.get('description').errors &&
-            categoryForm.get('description').touched
+            subCategoryForm.get('description').errors &&
+            subCategoryForm.get('description').touched
           "
         >
           Description is requited
@@ -89,7 +113,7 @@
       <button
         mat-flat-button
         color="primary"
-        [disabled]="categoryForm.invalid"
+        [disabled]="subCategoryForm.invalid"
         type="submit"
       >
         Ingresar
