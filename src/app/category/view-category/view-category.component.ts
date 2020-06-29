@@ -9,8 +9,6 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ViewCategoryComponent implements OnInit {
   rows: any = [];
-  categoryData;
-  subCategoryData;
   unir = [];
 
   ColumnMode = ColumnMode;

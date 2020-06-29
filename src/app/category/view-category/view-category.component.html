@@ -1,5 +1,9 @@
 <div class="container">
-    <ngx-datatable
+  <br />
+  <div class="mat-title">
+    Category List
+  </div>
+  <ngx-datatable
       class="material"
       [columnMode]="ColumnMode.flex"
       [headerHeight]="50"
@@ -9,13 +13,14 @@
       [treeToRelation]="'_id'"
       [rows]="rows"
       (treeAction)="onTreeAction($event)"
+      [limit]="5"
     >
-      <ngx-datatable-column name="Name" [flexGrow]="3" [isTreeColumn]="true">
+      <ngx-datatable-column name="Name" [flexGrow]="2" [isTreeColumn]="true">
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{ value }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Description" [flexGrow]="1">
+      <ngx-datatable-column name="Description" [flexGrow]="2">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{ value }}
         </ng-template>
@@ -32,7 +37,7 @@
                 delete
               </mat-icon>
             </button>
-            <button mat-icon-button routerLink="/products-edit/{{value}}">
+            <button mat-icon-button routerLink="/category-edit/{{value._id}}" [queryParams]="{subname: value.subname}">
               <mat-icon>
                 create
               </mat-icon>

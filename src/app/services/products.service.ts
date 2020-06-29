@@ -102,5 +102,37 @@ export class ProductsService {
       },
     })
   }
+
+  getCategoryById(id){
+    return this.http.get(environment.endpoint+'/category/getone/'+id, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
+
+  getSubCategoryById(id){
+    return this.http.get(environment.endpoint+'/subcategory/getone/'+id, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
+
+  updateCategory(id, data){
+    return this.http.put(environment.endpoint+'/category/update/'+id, data, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
+
+  updateSubCategory(id, data){
+    return this.http.put(environment.endpoint+'/subcategory/update/'+id, data, {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+  }
   
 }

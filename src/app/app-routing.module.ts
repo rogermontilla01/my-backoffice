@@ -9,6 +9,7 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { ProductsEditComponent } from './products/products-edit/products-edit.component';
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { ViewCategoryComponent } from './category/view-category/view-category.component';
+import { EditCategoryComponent } from './category/edit-category/edit-category.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'products-edit/:id', component: ProductsEditComponent },
   { path: 'create-category', component: CreateCategoryComponent },
   { path: 'view-category', component: ViewCategoryComponent },
+  { path: 'category-edit/:id', component: EditCategoryComponent },
+
 ];
 
 @NgModule({
