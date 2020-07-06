@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +28,7 @@ import { CreateCategoryComponent } from './category/create-category/create-categ
 import { ViewCategoryComponent } from './category/view-category/view-category.component';
 import { EditCategoryComponent } from './category/edit-category/edit-category.component'
 import { FileUploadModule } from "ng2-file-upload";
+import { InterceptorsService } from "./services/interceptors.service";
 
 
 @NgModule({
@@ -65,7 +66,9 @@ import { FileUploadModule } from "ng2-file-upload";
     FileUploadModule,
     
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorsService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
