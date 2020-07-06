@@ -1,7 +1,6 @@
 <div class="container">
   <mat-card class="product-card">
     <div class="mat-title">Create New Product</div>
-    <br />
     <form [formGroup]="prodForm" (ngSubmit)="register()">
       <div>
         <mat-form-field class="login-full-width">
@@ -101,9 +100,11 @@
             type="subcategory"
             id="subcategory"
           >
-            <mat-option *ngFor="let item of subcategoryData" value={{item._id}}>{{
-              item.subname
-            }}</mat-option>
+            <mat-option
+              *ngFor="let item of subcategoryData"
+              value="{{ item._id }}"
+              >{{ item.subname }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
         <div
@@ -117,14 +118,29 @@
         </div>
       </div>
       <div>
-        <mat-checkbox formControlName="featured">Is this a featured product?</mat-checkbox>
+          <label for="images" >Add Product Image</label>
+          <br>
+          <input
+            id="images"
+            type="file"
+            name="photo"
+            ng2FileSelect
+            [uploader]="uploader"
+            formControlName="images"
+        />
+      </div>
+      <div>
+        <br>
+        <mat-checkbox formControlName="featured"
+          >Is this a featured product?</mat-checkbox
+        >
       </div>
       <br />
       <button
         mat-flat-button
         color="primary"
-        [disabled]="prodForm.invalid"
         type="submit"
+        [disabled]="prodForm.invalid"
       >
         Ingresar
       </button>

@@ -11,6 +11,7 @@ export class StaffService {
   Login(data) {
     return this.http.post(environment.endpoint + '/staff/login', data);
   }
+
   register(data) {
     return this.http.post(environment.endpoint + '/staff/create', data, {
       headers: {

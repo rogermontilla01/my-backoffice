@@ -16,13 +16,19 @@
     [columnMode]="ColumnMode.force"
     [headerHeight]="50"
     [footerHeight]="50"
-    rowHeight="50"
+    rowHeight="80"
     [externalPaging]="true"
     [count]="page.totalElements"
     [offset]="page.pageNumber"
     [limit]="page.size"
     (page)="setPage($event)"
   >
+
+  <ngx-datatable-column name='Images' prop='images.filename'>
+    <ng-template let-row="data" let-value="value" ngx-datatable-cell-template>
+        <img src="http://localhost:3000/images/{{value}}" alt="" width="80">
+    </ng-template>
+  </ngx-datatable-column>
     <ngx-datatable-column
       *ngFor="let col of columns"
       [name]="col.name"

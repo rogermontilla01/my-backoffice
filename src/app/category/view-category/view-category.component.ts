@@ -9,15 +9,19 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ViewCategoryComponent implements OnInit {
   rows: any = [];
-  unir = [];
+  unir;
 
   ColumnMode = ColumnMode;
 
   constructor(private categoryService: ProductsService) {}
 
   ngOnInit(): void {
+    this.getElements()
+  }
+
+  getElements(){
     this.categoryService.getCategories().subscribe((data) => {
-      this.unir = this.unir.concat(data);
+      this.unir = data;
       console.log(this.unir);
     });
 
@@ -26,16 +30,15 @@ export class ViewCategoryComponent implements OnInit {
       console.log(this.unir);
 
       this.rows = this.unir.map((data) => {
-        var info = data;
-        if (info.name == null) {
-          info.name = info.subname;
+        if (data.name == null) {
+          data.name = data.subname;
         }
-        if (info.subname != null) {
-          info.treeStatus = 'disabled';
+        if (data.subname != null) {
+          data.treeStatus = 'disabled';
         } else {
-          info.treeStatus = 'collapsed';
+          data.treeStatus = 'collapsed';
         }
-        return info;
+        return data;
       });
 
       console.log(this.rows);
@@ -57,9 +60,11 @@ export class ViewCategoryComponent implements OnInit {
     if(value.subname == undefined){    
     this.categoryService.deleteCategory(id).subscribe((data) => {
       console.log(data);
+      this.getElements()
     });
   }else{
     this.categoryService.deleteSubCategory(id).subscribe((data)=>{
+      this.getElements()
       console.log(data)
     })
   }

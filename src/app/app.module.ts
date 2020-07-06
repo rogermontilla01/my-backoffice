@@ -27,7 +27,7 @@ import { ProductsEditComponent } from './products/products-edit/products-edit.co
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { ViewCategoryComponent } from './category/view-category/view-category.component';
 import { EditCategoryComponent } from './category/edit-category/edit-category.component'
-
+import { FileUploadModule } from "ng2-file-upload";
 
 
 @NgModule({
@@ -62,6 +62,7 @@ import { EditCategoryComponent } from './category/edit-category/edit-category.co
     FormsModule,
     ReactiveFormsModule,
     NgxDatatableModule,
+    FileUploadModule,
     
   ],
   providers: [],

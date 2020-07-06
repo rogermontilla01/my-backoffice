@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
-import { element } from 'protractor';
+import { StaffService } from '../services/staff.service';
+import { Router } from '@angular/router';
 
 
 /** @title Responsive sidenav */
@@ -41,10 +42,18 @@ export class NavbarComponent implements OnDestroy {
     },
   ];
   
+  
+  private staffService: StaffService;
+
+  logout(){
+    localStorage.removeItem('token')
+    this.router.navigate(['/login'])
+  }
+
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);

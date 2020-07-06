@@ -51,13 +51,12 @@ export class ProductsListComponent implements OnInit {
     });
   }
 
-   //falta terminar
+  //falta terminar
   deleteProd(id) {
-    this.ProductsService.deleteProducts(id).subscribe(data=>{
+    this.ProductsService.deleteProducts(id).subscribe((data) => {
       console.log(data);
       this.setPage({ offset: 0 });
-
-    })
+    });
   }
 
   ngOnInit(): void {
