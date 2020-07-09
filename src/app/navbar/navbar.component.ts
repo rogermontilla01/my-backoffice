@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { StaffService } from '../services/staff.service';
 import { Router } from '@angular/router';
 
-
 /** @title Responsive sidenav */
 @Component({
   selector: 'app-navbar',
@@ -12,9 +11,10 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
-  staticNav = [
-    { path: '/', name: 'Home' },
-  ];
+
+  showSideNav = false;
+
+  staticNav = [{ path: '/', name: 'Home' }];
   expanNav = [
     {
       category: 'Products',
@@ -41,39 +41,46 @@ export class NavbarComponent implements OnDestroy {
       ],
     },
   ];
-  
-  
-  private staffService: StaffService;
-
-  logout(){
-    localStorage.removeItem('token')
-    this.router.navigate(['/login'])
-  }
-
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router) {
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private router: Router,
+    private staffService: StaffService
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.staffService.isAuthenticate().subscribe((state)=>{
+      if(state){
+        this.showSideNav = true
+      }else{
+        this.showSideNav = false
+      }
+    })
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  open(category){
-    this.expanNav.forEach(element => {
-      if(element.category == category && element.expaded == false){
-          element.expaded = true
-      }else{
-        element.expaded = false
+  logout() {
+    this.staffService.Logout();
+    this.router.navigate(['/login']);
+  }
+
+  open(category) {
+    this.expanNav.forEach((element) => {
+      if (element.category == category && element.expaded == false) {
+        element.expaded = true;
+      } else {
+        element.expaded = false;
       }
     });
   }
 
   shouldRun = true;
 }
-
-

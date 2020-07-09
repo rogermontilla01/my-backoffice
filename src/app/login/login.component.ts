@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   login(){
     this._auth.Login(this.loginForm.value).subscribe(data=>{
       localStorage.setItem('token', data['token'])
+      this._auth.authenticate()
       this._snackBar.open('Bienvenido/a', 'MyEcommerce', {
         duration: 2000
       })

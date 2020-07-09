@@ -5,7 +5,7 @@
 >
   <mat-toolbar color="primary" class="navbar-toolbar">
     <div ngClass>
-      <button mat-icon-button (click)="snav.toggle()">
+      <button *ngIf="showSideNav" mat-icon-button (click)="snav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span class="navbar-app-name"> Backoffice</span>
@@ -26,11 +26,11 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
     >
-      <mat-nav-list>
+      <mat-nav-list *ngIf="showSideNav">
         <a
           mat-list-item
-          routerLink="{{ nav.path }}"
           *ngFor="let nav of staticNav"
+          routerLink="{{ nav.path }}"
           >{{ nav.name }}</a
         >
         <div *ngFor="let item of expanNav">
@@ -41,21 +41,6 @@
             <button class='list-button' mat-button routerLink="{{ element.path }}" *ngFor="let element of item.datos">{{ element.name }}</button>
           </div>
         </div>
-        <!-- <mat-accordion displayMode='flat'>
-          <mat-expansion-panel *ngFor="let item of expanNav">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{ item.category }}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <a
-              mat-list-item
-              *ngFor="let element of item.datos"
-              routerLink="{{ element.path }}"
-              >{{ element.name }}</a
-            >
-          </mat-expansion-panel>
-        </mat-accordion> -->
       </mat-nav-list>
     </mat-sidenav>
 

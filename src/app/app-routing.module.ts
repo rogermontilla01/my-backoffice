@@ -10,18 +10,19 @@ import { ProductsEditComponent } from './products/products-edit/products-edit.co
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { ViewCategoryComponent } from './category/view-category/view-category.component';
 import { EditCategoryComponent } from './category/edit-category/edit-category.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'register-staff', component: RegisterStaffComponent },
-  { path: 'view-staff', component: ViewStaffComponent },
-  { path: 'edit-staff/:id', component: EditStaffComponent },
-  { path: 'create-products', component: CreateProductsComponent },
-  { path: 'list-products', component: ProductsListComponent },
-  { path: 'products-edit/:id', component: ProductsEditComponent },
-  { path: 'create-category', component: CreateCategoryComponent },
-  { path: 'view-category', component: ViewCategoryComponent },
-  { path: 'category-edit/:id', component: EditCategoryComponent },
+  { path: 'register-staff', canActivate:[AuthGuard],component: RegisterStaffComponent },
+  { path: 'view-staff', canActivate:[AuthGuard],component: ViewStaffComponent },
+  { path: 'edit-staff/:id', canActivate:[AuthGuard],component: EditStaffComponent },
+  { path: 'create-products', canActivate:[AuthGuard],component: CreateProductsComponent },
+  { path: 'list-products', canActivate:[AuthGuard],component: ProductsListComponent },
+  { path: 'products-edit/:id', canActivate:[AuthGuard],component: ProductsEditComponent },
+  { path: 'create-category', canActivate:[AuthGuard],component: CreateCategoryComponent },
+  { path: 'view-category', canActivate:[AuthGuard],component: ViewCategoryComponent },
+  { path: 'category-edit/:id', canActivate:[AuthGuard],component: EditCategoryComponent },
 
 ];
 
