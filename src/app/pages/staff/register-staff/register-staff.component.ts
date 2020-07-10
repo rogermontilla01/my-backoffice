@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {StaffService} from '../../../services/staff.service'
 import { Router } from '@angular/router';
 
@@ -14,7 +15,8 @@ export class RegisterStaffComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private staffReg: StaffService,
-    private route: Router
+    private route: Router,
+    private _snackBar: MatSnackBar,
   ) {
       this.regForm = this.fb.group({
         name:["",[Validators.required, Validators.minLength(4)]],
@@ -31,6 +33,9 @@ export class RegisterStaffComponent implements OnInit {
     this.staffReg.register(this.regForm.value).subscribe(data=>{
       //Salio todo bien
       console.log(data)
+      this._snackBar.open('Staff was registered', 'Successfully', {
+        duration: 2000
+      })
       this.route.navigate(['/login'])
     }, err=>{
       //en caso de error

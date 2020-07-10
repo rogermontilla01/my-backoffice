@@ -35,14 +35,14 @@
       [prop]="col.prop"
     >
     </ngx-datatable-column>
-    <ngx-datatable-column name="Options" prop="id">
+    <ngx-datatable-column name="Options" prop="">
       <ng-template let-row="data" let-value="value" ngx-datatable-cell-template>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <div>
-            <button mat-menu-item (click)="deleteProd(value)">
+            <button mat-menu-item (click)="deleteProd(value._id, value.images.filename)">
               <mat-icon>
               delete
               </mat-icon>
@@ -50,7 +50,7 @@
             </button>
           </div>
           <div>
-            <button mat-menu-item routerLink="/products-edit/{{value}}">
+            <button mat-menu-item routerLink="/products-edit/{{value._id}}">
               <mat-icon>
               create
               </mat-icon>

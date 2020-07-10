@@ -29,8 +29,8 @@ export class ProductsService {
     return this.http.get(environment.endpoint + '/products/'+query);
   }
 
-  deleteProducts(id) {
-    return this.http.delete(environment.endpoint + '/products/delete-product/' + id);
+  deleteProducts(id, img) {
+    return this.http.delete(environment.endpoint + '/products/delete-product/' + id+'/'+img);
   }
 
   /* Category Methods */

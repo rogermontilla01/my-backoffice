@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
 
@@ -16,7 +17,8 @@ export class CreateCategoryComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private categoryService: ProductsService,
-    private route: Router
+    private route: Router,
+    private snackBar: MatSnackBar
   ) {
     this.categoryForm = this.fb.group({
       category: ['', [Validators.required, Validators.minLength(4)]],
@@ -35,13 +37,14 @@ export class CreateCategoryComponent implements OnInit {
     //Ejemplo con error en observable
     this.categoryService.createCategory(this.categoryForm.value).subscribe(
       (data) => {
-        //Salio todo bien
-        console.log(data);
+        this.snackBar.open('Category was created', 'Successfully', {
+          duration: 2000
+        })        
         this.categoryForm.reset()
       },
       (err) => {
         //en caso de error
-        alert(err.error.msg);
+        console.log(err.error.msg);
       }
     );
   }
@@ -51,13 +54,14 @@ export class CreateCategoryComponent implements OnInit {
     //Ejemplo con error en observable
     this.categoryService.createSubCategory(this.subCategoryForm.value).subscribe(
       (data) => {
-        //Salio todo bien
-        console.log(data);
+        this.snackBar.open('Subategory was created', 'Successfully', {
+          duration: 2000
+        })
         this.subCategoryForm.reset()
       },
       (err) => {
         //en caso de error
-        alert(err.error.msg);
+        console.log(err.error.msg);
       }
     );
   }

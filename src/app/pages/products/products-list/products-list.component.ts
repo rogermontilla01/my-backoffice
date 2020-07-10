@@ -54,10 +54,10 @@ export class ProductsListComponent implements OnInit {
   }
 
   //falta terminar
-  deleteProd(id) {
+  deleteProd(id, img) {
     try {
-      this.ProductsService.deleteProducts(id).subscribe((data) => {
-        this.snackBar.open('Product was deleted', 'Successfuly', {
+      this.ProductsService.deleteProducts(id, img).subscribe((data) => {
+        this.snackBar.open('Product was deleted', 'Successfully', {
           duration: 2000
         })
         this.setPage({ offset: 0 });

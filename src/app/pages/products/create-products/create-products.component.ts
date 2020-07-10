@@ -53,7 +53,7 @@ export class CreateProductsComponent implements OnInit {
         this.prodForm.get('images').setValue(this.imagesData);
         this.prodCreate.createProd(this.prodForm.value).subscribe(
           (data) => {
-            this.snackBar.open('Product was crated', 'Successfuly', {
+            this.snackBar.open('Product was crated', 'Successfully', {
               duration: 2000
             })
             this.prodForm.reset();

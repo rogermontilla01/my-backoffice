@@ -2,13 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FileUploader } from 'ng2-file-upload';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
 
+const URL = 'http://localhost:3000/products/upload-img/';
 @Component({
   selector: 'app-products-edit',
   templateUrl: './products-edit.component.html',
   styleUrls: ['./products-edit.component.css']
 })
 export class ProductsEditComponent implements OnInit {
+  imgState = new BehaviorSubject(false);
+
+  public uploader: FileUploader = new FileUploader({
+    url: URL,
+    itemAlias: 'photo',
+    headers: [{ name: 'x-access-token', value: localStorage.getItem('token') }],
+  });
+  imagesData;
   prodData;
   subcategoryData;
   prodForm: FormGroup;
@@ -27,22 +39,23 @@ export class ProductsEditComponent implements OnInit {
       quantity: ['', Validators.required],
       subcategory: ['', Validators.required],
       featured: ['true', Validators.required],
+      images:['']
     });
   }
 
   updateProd() {
-    let id = this.activatedRouted.snapshot.paramMap.get('id')
-    this.prodService.updateProd(id, this.prodForm.value).subscribe(
-      (data) => {
-        //Salio todo bien
-        console.log(data);
-        this.route.navigate(['/list-products']);
-      },
-      (err) => {
-        //en caso de error
-        alert(err);
+    this.uploader.uploadAll();
+
+    this.imgState.subscribe((state)=>{
+      if(state){
+        this.prodForm.get('images').setValue(this.imagesData);
+        this.uploadData()
+      }else{
+        this.uploadData()
       }
-    );
+    })
+
+    
   }
 
   ngOnInit(): void {
@@ -56,6 +69,23 @@ export class ProductsEditComponent implements OnInit {
       this.prodForm.get('offert').setValue(this.prodData.offert)
       this.prodForm.get('quantity').setValue(this.prodData.quantity)
       this.prodForm.get('subcategory').setValue(this.prodData.subcategory)
+      this.prodForm.get('images').setValue(this.prodData.images)
+      
+      this.uploader.onAfterAddingFile = (file) => {
+        file.withCredentials = false;
+      };
+      this.uploader.onCompleteItem = (
+        item: any,
+        response: any,
+        status: any,
+        headers: any
+      ) => {
+        let json = JSON.parse(response);
+        this.imagesData = json['data'];
+        //cambia el estado del observable
+        this.imgState.next(true)
+      };
+
       console.log(this.prodData)
     });
     this.prodService.getSubCategories().subscribe(data=>{
@@ -63,4 +93,20 @@ export class ProductsEditComponent implements OnInit {
     })
   }
 
+  uploadData(){
+    let id = this.activatedRouted.snapshot.paramMap.get('id')
+        this.prodService.updateProd(id, this.prodForm.value).subscribe(
+          (data) => {
+            console.log(data);
+            this.route.navigate(['/list-products']);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+  }
+
+  isImgUploaded(){
+    return this.imgState
+  }
 }
