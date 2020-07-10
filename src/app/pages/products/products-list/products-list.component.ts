@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
+import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
 import { ColumnMode } from '@swimlane/ngx-datatable';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-products-list',
@@ -20,43 +21,53 @@ export class ProductsListComponent implements OnInit {
 
   productsData: any;
 
-  constructor(private ProductsService: ProductsService, private route: Router) {
+  constructor(
+    private ProductsService: ProductsService,
+    private route: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.page['pageNumber'] = 0;
     this.page['size'] = 20;
     this.columns = [
       { name: 'Name' },
-      { name: 'SKU' },
       { name: 'Description' },
       { name: 'Price' },
       { name: 'Offert' },
       { name: 'Quantity' },
       { name: 'Subcategory', prop: 'subcategory.subname' },
       { name: 'Featured' },
+      { name: 'SKU' },
     ];
   }
 
   setPage(pageInfo) {
     this.ProductsService.getAllProducts(pageInfo).subscribe((data) => {
-      console.log(data);
       //REgistros de productos (Informacion)
       this.rows = data['docs'];
-      console.log(this.rows);
       //Cantidad total de productos
       this.page['totalElements'] = data['totalDocs'];
       //Cantidad de registros por pagina
       this.page['size'] = data['limit'];
       //La pagina que estoy consultando
       this.page['pageNumber'] = pageInfo['offset'];
-      console.log(this.page);
     });
   }
 
   //falta terminar
   deleteProd(id) {
-    this.ProductsService.deleteProducts(id).subscribe((data) => {
-      console.log(data);
-      this.setPage({ offset: 0 });
-    });
+    try {
+      this.ProductsService.deleteProducts(id).subscribe((data) => {
+        this.snackBar.open('Product was deleted', 'Successfuly', {
+          duration: 2000
+        })
+        this.setPage({ offset: 0 });
+      });
+    } catch (error) {
+      this.snackBar.open("Product was not deleted", 'Error', {
+        duration: 2000
+      })
+      console.log(error)
+    }
   }
 
   ngOnInit(): void {

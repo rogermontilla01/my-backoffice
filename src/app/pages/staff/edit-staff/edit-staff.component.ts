@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { StaffService } from '../../services/staff.service';
+import { StaffService } from '../../../services/staff.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 

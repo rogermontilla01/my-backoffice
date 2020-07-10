@@ -5,13 +5,13 @@
     [rows]="rows"
     [columns]="[
       { name: 'Name' },
-      { name: 'SKU' },
       { name: 'Description' },
       { name: 'Price' },
       { name: 'Offert' },
       { name: 'Quantity' },
       { name: 'Subcategory', prop: 'subcategory.subname' },
-      { name: 'Featured' }
+      { name: 'Featured' },
+      { name: 'SKU' }
     ]"
     [columnMode]="ColumnMode.force"
     [headerHeight]="50"
@@ -37,16 +37,27 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Options" prop="id">
       <ng-template let-row="data" let-value="value" ngx-datatable-cell-template>
-        <button mat-icon-button (click)="deleteProd(value)">
-            <mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div>
+            <button mat-menu-item (click)="deleteProd(value)">
+              <mat-icon>
               delete
-            </mat-icon>
-          </button>
-          <button mat-icon-button routerLink="/products-edit/{{value}}">
-            <mat-icon>
+              </mat-icon>
+              <span>Delete</span>
+            </button>
+          </div>
+          <div>
+            <button mat-menu-item routerLink="/products-edit/{{value}}">
+              <mat-icon>
               create
-            </mat-icon>
-          </button>
+              </mat-icon>
+              <span>Modify</span>
+            </button>
+          </div>
+        </mat-menu>  
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>

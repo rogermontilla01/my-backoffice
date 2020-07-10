@@ -13,7 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatMenuModule} from '@angular/material/menu';
 
 
 const MaterialComponents = [
@@ -31,6 +31,7 @@ const MaterialComponents = [
   MatRadioModule,
   MatCheckboxModule,
   MatExpansionModule,
+  MatMenuModule,
 ];
 
 @NgModule({

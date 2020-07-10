@@ -126,7 +126,6 @@
             name="photo"
             ng2FileSelect
             [uploader]="uploader"
-            formControlName="images"
         />
       </div>
       <div>
@@ -140,7 +139,7 @@
         mat-flat-button
         color="primary"
         type="submit"
-        [disabled]="prodForm.invalid"
+        [disabled]="prodForm.invalid || !uploader.getNotUploadedItems().length"
       >
         Ingresar
       </button>

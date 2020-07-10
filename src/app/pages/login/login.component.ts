@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { StaffService } from '../services/staff.service';
+import { StaffService } from '../../services/staff.service';
 
 
 @Component({
@@ -23,13 +23,22 @@ export class LoginComponent implements OnInit {
 
   login(){
     this._auth.Login(this.loginForm.value).subscribe(data=>{
-      localStorage.setItem('token', data['token'])
-      this._auth.authenticate()
-      this._snackBar.open('Bienvenido/a', 'MyEcommerce', {
-        duration: 2000
-      })
-      //Metodo para redirigir al usuario
-      this._router.navigate(['/'])
+      if(data['token'] === undefined){
+        this._snackBar.open('Authentication failed', 'Please try again', {
+          duration: 2000
+        })
+        this._router.navigate(['/login'])
+      }else{
+        localStorage.setItem('token', data['token'])
+        this._auth.authenticate()
+        this._snackBar.open('Bienvenido/a', 'MyEcommerce', {
+          duration: 2000
+        })
+
+        this._router.navigate(['/'])
+      }
+      
+      
     })
   }
 

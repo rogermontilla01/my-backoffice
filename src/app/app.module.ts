@@ -16,17 +16,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { LoginComponent } from './login/login.component';
-import { RegisterStaffComponent } from './staff/register-staff/register-staff.component';
-import { ViewStaffComponent } from './staff/view-staff/view-staff.component';
-import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
-import { CreateProductsComponent } from './products/create-products/create-products.component';
-import { ProductsListComponent } from './products/products-list/products-list.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterStaffComponent } from './pages/staff/register-staff/register-staff.component';
+import { ViewStaffComponent } from './pages/staff/view-staff/view-staff.component';
+import { EditStaffComponent } from './pages/staff/edit-staff/edit-staff.component';
+import { CreateProductsComponent } from './pages/products/create-products/create-products.component';
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ProductsEditComponent } from './products/products-edit/products-edit.component';
-import { CreateCategoryComponent } from './category/create-category/create-category.component';
-import { ViewCategoryComponent } from './category/view-category/view-category.component';
-import { EditCategoryComponent } from './category/edit-category/edit-category.component'
+import { ProductsEditComponent } from './pages/products/products-edit/products-edit.component';
+import { CreateCategoryComponent } from './pages/category/create-category/create-category.component';
+import { ViewCategoryComponent } from './pages/category/view-category/view-category.component';
+import { EditCategoryComponent } from './pages/category/edit-category/edit-category.component'
 import { FileUploadModule } from "ng2-file-upload";
 import { InterceptorsService } from "./services/interceptors.service";
 
