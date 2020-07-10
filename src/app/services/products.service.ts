@@ -12,8 +12,9 @@ export class ProductsService {
     return this.http.post(environment.endpoint + '/products/create', data);
   }
 
-  updateProd(id, data) {
-    return this.http.put(environment.endpoint + '/products/'+id, data);
+  //Obtine el id, los valores del formulario y de oldImg
+  updateProd(id, data, oldImg) {
+    return this.http.put(environment.endpoint + '/products/'+id+'?oldImg='+oldImg, data);
   }
 
   getProdById(id){

@@ -14,16 +14,18 @@ const URL = 'http://localhost:3000/products/upload-img/';
 })
 export class ProductsEditComponent implements OnInit {
   imgState = new BehaviorSubject(false);
+  imagesData;
+  prodData;
+  subcategoryData;
+  prodForm: FormGroup;
+  oldImg: string;
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
     itemAlias: 'photo',
     headers: [{ name: 'x-access-token', value: localStorage.getItem('token') }],
   });
-  imagesData;
-  prodData;
-  subcategoryData;
-  prodForm: FormGroup;
+
   constructor(
     private fb: FormBuilder,
     private prodService: ProductsService,
@@ -95,15 +97,21 @@ export class ProductsEditComponent implements OnInit {
 
   uploadData(){
     let id = this.activatedRouted.snapshot.paramMap.get('id')
-        this.prodService.updateProd(id, this.prodForm.value).subscribe(
-          (data) => {
-            console.log(data);
-            this.route.navigate(['/list-products']);
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+
+    //Obtengo nombre de oldImg del queryParams
+    this.activatedRouted.queryParams.subscribe(params =>{
+      this.oldImg = params['oldImg']
+    })
+    //actualizar el producto y se manda el nombre de oldImg para ser elminado
+    this.prodService.updateProd(id, this.prodForm.value, this.oldImg).subscribe(
+      (data) => {
+        console.log(data);
+        this.route.navigate(['/list-products']);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   isImgUploaded(){
