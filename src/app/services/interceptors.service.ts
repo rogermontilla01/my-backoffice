@@ -44,7 +44,7 @@ export class InterceptorsService implements HttpInterceptor {
         if (err.status === 401) {
           this.router.navigateByUrl('/login');
         }
-        return throwError(err);
+        return throwError({status: 'Error catched with interceptors', error: err});
       })
     );
   }

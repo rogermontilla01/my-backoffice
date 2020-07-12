@@ -4,7 +4,7 @@ import { ProductsService } from '../../../services/products.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject } from 'rxjs';
+
 
 const URL = 'http://localhost:3000/products/upload-img/';
 @Component({
@@ -13,7 +13,7 @@ const URL = 'http://localhost:3000/products/upload-img/';
   styleUrls: ['./products-edit.component.css']
 })
 export class ProductsEditComponent implements OnInit {
-  imgState = new BehaviorSubject(false);
+  
   imagesData;
   prodData;
   subcategoryData;
@@ -45,19 +45,10 @@ export class ProductsEditComponent implements OnInit {
     });
   }
 
-  updateProd() {
-    this.uploader.uploadAll();
-
-    this.imgState.subscribe((state)=>{
-      if(state){
-        this.prodForm.get('images').setValue(this.imagesData);
-        this.uploadData()
-      }else{
-        this.uploadData()
-      }
-    })
-
-    
+  processSubmit(event){
+    if(event){
+      this.uploader.uploadAll();
+    }
   }
 
   ngOnInit(): void {
@@ -84,8 +75,9 @@ export class ProductsEditComponent implements OnInit {
       ) => {
         let json = JSON.parse(response);
         this.imagesData = json['data'];
-        //cambia el estado del observable
-        this.imgState.next(true)
+        
+        this.prodForm.get('images').setValue(this.imagesData);
+        this.uploadData()
       };
 
       console.log(this.prodData)
@@ -114,7 +106,4 @@ export class ProductsEditComponent implements OnInit {
     );
   }
 
-  isImgUploaded(){
-    return this.imgState
-  }
 }

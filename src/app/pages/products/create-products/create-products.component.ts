@@ -4,7 +4,7 @@ import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject } from 'rxjs';
+
 
 const URL = 'http://localhost:3000/products/upload-img/';
 @Component({
@@ -13,8 +13,7 @@ const URL = 'http://localhost:3000/products/upload-img/';
   styleUrls: ['./create-products.component.css'],
 })
 export class CreateProductsComponent implements OnInit {
-  imgState = new BehaviorSubject(false);
-
+  
   public uploader: FileUploader = new FileUploader({
     url: URL,
     itemAlias: 'photo',
@@ -23,7 +22,6 @@ export class CreateProductsComponent implements OnInit {
 
   subcategoryData;
   prodForm: FormGroup;
-  //Que hace esta variable???
   imagesData;
   constructor(
     private fb: FormBuilder,
@@ -42,32 +40,13 @@ export class CreateProductsComponent implements OnInit {
       featured: ['true', Validators.required],
       images:['']
     });
+
   }
 
-  register() {
-
-    this.uploader.uploadAll();
-
-    this.imgState.subscribe((state)=>{
-      if(state){
-        this.prodForm.get('images').setValue(this.imagesData);
-        this.prodCreate.createProd(this.prodForm.value).subscribe(
-          (data) => {
-            this.snackBar.open('Product was crated', 'Successfully', {
-              duration: 2000
-            })
-            this.prodForm.reset();
-          },
-          (err) => {
-            this.snackBar.open("Product wasn't created",'Try again', {
-              duration: 2000
-            })
-            console.log(err.error.msg);
-          }
-        );
-      }
-    })
-    
+  processSubmit(event) {
+    if(event){
+      this.uploader.uploadAll();
+    }    
   }
 
   ngOnInit(): void {
@@ -86,13 +65,26 @@ export class CreateProductsComponent implements OnInit {
     ) => {
       let json = JSON.parse(response);
       this.imagesData = json['data'];
-      //cambia el estado del observable
-      this.imgState.next(true)
+      
+      this.prodForm.get('images').setValue(this.imagesData);
+      
+      this.prodCreate.createProd(this.prodForm.value).subscribe(
+        (data) => {
+          this.snackBar.open('Product was crated', 'Successfully', {
+            duration: 2000
+          })
+          this.prodForm.reset();
+        },
+        (err) => {
+          this.snackBar.open("Product wasn't created",'Try again', {
+            duration: 2000
+          })
+          console.log(err.error.msg);
+        }
+      );
+      
     };
-  }
-
-  isImgUploaded(){
-    return this.imgState
+    
   }
 
 }

@@ -1,16 +1,7 @@
-<app-form-products
-[prodForm]="prodForm"
-[subcategoryData]="subcategoryData"
-[uploader]="uploader"
-(submit)="processSubmit($event)"
->
-</app-form-products>
-
-<!-- <div class="container">
+<div class="container">
     <mat-card class="product-card">
-      <div class="mat-title">Edit Product</div>
-      <br />
-      <form [formGroup]="prodForm" (ngSubmit)="updateProd()">
+      <div class="mat-title">Create New Product</div>
+      <form [formGroup]="prodForm" (ngSubmit)="formSubmit()">
         <div>
           <mat-form-field class="login-full-width">
             <mat-label for="name">Name</mat-label>
@@ -109,9 +100,11 @@
               type="subcategory"
               id="subcategory"
             >
-              <mat-option *ngFor="let item of subcategoryData" value={{item._id}}>{{
-                item.subname
-              }}</mat-option>
+              <mat-option
+                *ngFor="let item of subcategoryData"
+                value="{{ item._id }}"
+                >{{ item.subname }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
           <div
@@ -125,30 +118,31 @@
           </div>
         </div>
         <div>
-          <label for="images" >Add Product Image</label>
-          <br>
-          <input
-            id="images"
-            type="file"
-            name="photo"
-            ng2FileSelect
-            [uploader]="uploader"
-        />
-      </div>
+            <label for="images" >Add Product Image</label>
+            <br>
+            <input
+              id="images"
+              type="file"
+              name="photo"
+              ng2FileSelect
+              [uploader]="uploader"
+          />
+        </div>
         <div>
           <br>
-          <mat-checkbox formControlName="featured">Is this a featured product?</mat-checkbox>
+          <mat-checkbox formControlName="featured"
+            >Is this a featured product?</mat-checkbox
+          >
         </div>
         <br />
         <button
           mat-flat-button
           color="primary"
-          [disabled]="prodForm.invalid"
           type="submit"
+          [disabled]="prodForm.invalid || !uploader.getNotUploadedItems().length"
         >
           Ingresar
         </button>
       </form>
     </mat-card>
   </div>
-   -->
