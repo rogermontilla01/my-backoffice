@@ -32,7 +32,8 @@ export class CreateCategoryComponent implements OnInit {
     })
   }
 
-  createCategory() {
+  processCategory(event){
+    if(event){
     console.log(this.categoryForm.value);
     //Ejemplo con error en observable
     this.categoryService.createCategory(this.categoryForm.value).subscribe(
@@ -46,11 +47,11 @@ export class CreateCategoryComponent implements OnInit {
         //en caso de error
         console.log(err.error.msg);
       }
-    );
+    );}
   }
 
-  createSubCategory() {
-    console.log(this.subCategoryForm.value);
+  processSubCategory(event){
+    if(event){console.log(this.subCategoryForm.value);
     //Ejemplo con error en observable
     this.categoryService.createSubCategory(this.subCategoryForm.value).subscribe(
       (data) => {
@@ -63,7 +64,7 @@ export class CreateCategoryComponent implements OnInit {
         //en caso de error
         console.log(err.error.msg);
       }
-    );
+    );}
   }
 
   ngOnInit(): void {

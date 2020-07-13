@@ -27,8 +27,9 @@ export class RegisterStaffComponent implements OnInit {
       })
    }
 
-  register(){
-    console.log(this.regForm.value)
+   processSubmit(event){
+     if(event){
+      console.log(this.regForm.value)
     //Ejemplo con error en observable
     this.staffReg.register(this.regForm.value).subscribe(data=>{
       //Salio todo bien
@@ -40,6 +41,7 @@ export class RegisterStaffComponent implements OnInit {
     }, err=>{
       //en caso de error
       alert(err.error.msg)})
+     }
   }
 
   ngOnInit(): void {

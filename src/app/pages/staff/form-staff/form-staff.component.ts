@@ -1,14 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-form-products',
-  templateUrl: './form-products.component.html',
-  styleUrls: ['./form-products.component.css']
+  selector: 'app-form-staff',
+  templateUrl: './form-staff.component.html',
+  styleUrls: ['./form-staff.component.css']
 })
-export class FormProductsComponent implements OnInit {
-  @Input() prodForm;
-  @Input() subcategoryData
-  @Input() uploader
+export class FormStaffComponent implements OnInit {
+
+  @Input() regForm;
 
   @Output() submitForm = new EventEmitter<boolean>()
 

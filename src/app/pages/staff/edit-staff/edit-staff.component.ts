@@ -16,7 +16,7 @@ export class EditStaffComponent implements OnInit {
     private fb: FormBuilder,
     private staffService: StaffService,
     private route: Router,
-    private activatedRouted: ActivatedRoute,
+    private activatedRouted: ActivatedRoute
   ) {
     this.regForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
@@ -27,32 +27,33 @@ export class EditStaffComponent implements OnInit {
     });
   }
 
-  updateStaff() {
-    console.log(this.regForm.value);
-    let id = this.activatedRouted.snapshot.paramMap.get('id')
-    this.staffService.updateStaff(id, this.regForm.value).subscribe(
-      (data) => {
-        //Salio todo bien
-        console.log(data);
-        this.route.navigate(['/view-staff']);
-      },
-      (err) => {
-        //en caso de error
-        alert(err);
-      }
-    );
+  processSubmit(event) {
+    if (event) {
+      console.log(this.regForm.value);
+      let id = this.activatedRouted.snapshot.paramMap.get('id');
+      this.staffService.updateStaff(id, this.regForm.value).subscribe(
+        (data) => {
+          //Salio todo bien
+          console.log(data);
+          this.route.navigate(['/view-staff']);
+        },
+        (err) => {
+          //en caso de error
+          alert(err);
+        }
+      );
+    }
   }
 
   ngOnInit(): void {
-    let id = this.activatedRouted.snapshot.paramMap.get('id')
-    this.staffService.getStaffById(id).subscribe(data=>{
+    let id = this.activatedRouted.snapshot.paramMap.get('id');
+    this.staffService.getStaffById(id).subscribe((data) => {
       this.staffData = data['data'];
-      this.regForm.get('name').setValue(this.staffData.name)
-      this.regForm.get('user').setValue(this.staffData.user)
-      this.regForm.get('position').setValue(this.staffData.position)
-      this.regForm.get('email').setValue(this.staffData.email)
-      console.log(this.staffData)
+      this.regForm.get('name').setValue(this.staffData.name);
+      this.regForm.get('user').setValue(this.staffData.user);
+      this.regForm.get('position').setValue(this.staffData.position);
+      this.regForm.get('email').setValue(this.staffData.email);
+      console.log(this.staffData);
     });
-    
   }
 }

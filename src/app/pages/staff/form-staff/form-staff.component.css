@@ -1,0 +1,16 @@
+.register-card {
+    width: 300px;
+    margin: 10px auto;
+    text-align: center;
+  }
+  
+.container {
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 250px;
+}

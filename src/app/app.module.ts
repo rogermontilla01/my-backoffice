@@ -30,6 +30,8 @@ import { EditCategoryComponent } from './pages/category/edit-category/edit-categ
 import { FileUploadModule } from "ng2-file-upload";
 import { InterceptorsService } from "./services/interceptors.service";
 import { FormProductsComponent } from './pages/products/form-products/form-products.component';
+import { FormStaffComponent } from './pages/staff/form-staff/form-staff.component';
+import { FormCategoryComponent } from './pages/category/form-category/form-category.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import { FormProductsComponent } from './pages/products/form-products/form-produ
     ViewCategoryComponent,
     EditCategoryComponent,
     FormProductsComponent,
+    FormStaffComponent,
+    FormCategoryComponent,
   ],
   imports: [
     BrowserModule,
