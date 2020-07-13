@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductsService } from '../../../services/products.service';
+import { NavbarService } from '../../../services/navbar.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-category.component.css']
 })
 export class CreateCategoryComponent implements OnInit {
-
+  showAllForms:boolean = true
   categoryData;
   categoryForm: FormGroup;
   subCategoryForm: FormGroup;
@@ -18,8 +19,10 @@ export class CreateCategoryComponent implements OnInit {
     private fb: FormBuilder,
     private categoryService: ProductsService,
     private route: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private navBarService: NavbarService,
   ) {
+    this.navBarService.setNavBarState('Create Category')
     this.categoryForm = this.fb.group({
       category: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', Validators.required],
@@ -68,7 +71,7 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe(data=>{
+      this.categoryService.getCategories().subscribe(data=>{
       console.log(data)
       this.categoryData = data
     })

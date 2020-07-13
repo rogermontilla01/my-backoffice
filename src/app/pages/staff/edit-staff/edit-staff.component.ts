@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { StaffService } from '../../../services/staff.service';
+import { NavbarService } from "../../../services/navbar.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 
@@ -16,8 +17,10 @@ export class EditStaffComponent implements OnInit {
     private fb: FormBuilder,
     private staffService: StaffService,
     private route: Router,
-    private activatedRouted: ActivatedRoute
+    private activatedRouted: ActivatedRoute,
+    private navBarService: NavbarService,
   ) {
+    this.navBarService.setNavBarState('Edit Staff')
     this.regForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       user: ['', Validators.required],

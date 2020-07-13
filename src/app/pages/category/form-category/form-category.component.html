@@ -1,6 +1,6 @@
 <div class="container">
-    <mat-card class="category-card">
-      <div class="mat-title">Create New Category</div>
+    <mat-card class="category-card" *ngIf='subname == undefined || showAllForms'>
+      <div class="mat-title">New Category</div>
       <br />
       <form [formGroup]="categoryForm" (ngSubmit)="formSubmitCategory()">
         <div>
@@ -47,8 +47,8 @@
       </form>
     </mat-card>
   
-    <mat-card class="category-card">
-      <div class="mat-title">Create New Subcategory</div>
+    <mat-card class="category-card" *ngIf='subname != undefined || showAllForms'>
+      <div class="mat-title">New Subcategory</div>
       <br />
       <form [formGroup]="subCategoryForm" (ngSubmit)="formSubmitSubCategory()">
         <div>
@@ -61,7 +61,7 @@
               id="parent"
             >
               <mat-option *ngFor="let item of categoryData" value={{item._id}}>{{
-                item.name
+                item.category
               }}</mat-option>
             </mat-select>
           </mat-form-field>

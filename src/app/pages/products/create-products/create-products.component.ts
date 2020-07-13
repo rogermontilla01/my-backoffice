@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
+import { NavbarService } from "../../../services/navbar.service";
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -27,8 +28,10 @@ export class CreateProductsComponent implements OnInit {
     private fb: FormBuilder,
     private prodCreate: ProductsService,
     private route: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private navBarService: NavbarService,
   ) {
+    this.navBarService.setNavBarState('Products Create')
     this.prodForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       sku: ['', Validators.required],

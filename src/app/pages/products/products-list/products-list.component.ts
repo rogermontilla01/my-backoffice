@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
+import { NavbarService } from "../../../services/navbar.service";
 import { Router } from '@angular/router';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,8 +25,10 @@ export class ProductsListComponent implements OnInit {
   constructor(
     private ProductsService: ProductsService,
     private route: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private navBarService: NavbarService,
   ) {
+    this.navBarService.setNavBarState('Products List')
     this.page['pageNumber'] = 0;
     this.page['size'] = 20;
     this.columns = [

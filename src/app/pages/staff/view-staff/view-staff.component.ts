@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StaffService } from '../../../services/staff.service';
+import { NavbarService } from '../../../services/navbar.service';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,7 +16,13 @@ export class ViewStaffComponent implements OnInit {
   dataSource: MatTableDataSource<staffElement>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private staffService: StaffService, private route: Router) {}
+  constructor(
+    private staffService: StaffService,
+    private route: Router,
+    private navBarService: NavbarService,
+  ) {
+    this.navBarService.setNavBarState('Staff List')
+  }
 
   deleteStaff(data) {
     this.staffService.delete(data).subscribe((data) => {

@@ -1,8 +1,8 @@
 <div class="container">
   <br />
-  <div class="mat-title">
+  <!-- <div class="mat-title">
     Category List
-  </div>
+  </div> -->
   <ngx-datatable
       class="material"
       [columnMode]="ColumnMode.flex"
@@ -15,7 +15,7 @@
       (treeAction)="onTreeAction($event)"
       [limit]="8"
     >
-      <ngx-datatable-column name="Name" [flexGrow]="2" [isTreeColumn]="true">
+      <ngx-datatable-column name="Category" [flexGrow]="2" [isTreeColumn]="true">
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{ value }}
         </ng-template>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
+import { NavbarService } from "../../../services/navbar.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,8 +31,10 @@ export class ProductsEditComponent implements OnInit {
     private fb: FormBuilder,
     private prodService: ProductsService,
     private route: Router,
-    private activatedRouted: ActivatedRoute
+    private activatedRouted: ActivatedRoute,
+    private navBarService: NavbarService,
   ) {
+    this.navBarService.setNavBarState('Products Edit')
     this.prodForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       sku: ['', Validators.required],

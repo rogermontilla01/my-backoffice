@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { ProductsService } from '../../../services/products.service';
+import { NavbarService } from '../../../services/navbar.service';
 
 @Component({
   selector: 'app-view-category',
@@ -13,13 +14,18 @@ export class ViewCategoryComponent implements OnInit {
 
   ColumnMode = ColumnMode;
 
-  constructor(private categoryService: ProductsService) {}
-
-  ngOnInit(): void {
-    this.getElements()
+  constructor(
+    private categoryService: ProductsService,
+    private navBarService: NavbarService
+  ) {
+    this.navBarService.setNavBarState('Category List')
   }
 
-  getElements(){
+  ngOnInit(): void {
+    this.getElements();
+  }
+
+  getElements() {
     this.categoryService.getCategories().subscribe((data) => {
       this.unir = data;
       console.log(this.unir);
@@ -30,8 +36,8 @@ export class ViewCategoryComponent implements OnInit {
       console.log(this.unir);
 
       this.rows = this.unir.map((data) => {
-        if (data.name == null) {
-          data.name = data.subname;
+        if (data.category == null) {
+          data.category = data.subname;
         }
         if (data.subname != null) {
           data.treeStatus = 'disabled';
@@ -57,16 +63,16 @@ export class ViewCategoryComponent implements OnInit {
   }
 
   deleteCategory(id, value) {
-    if(value.subname == undefined){    
-    this.categoryService.deleteCategory(id).subscribe((data) => {
-      console.log(data);
-      this.getElements()
-    });
-  }else{
-    this.categoryService.deleteSubCategory(id).subscribe((data)=>{
-      this.getElements()
-      console.log(data)
-    })
-  }
+    if (value.subname == undefined) {
+      this.categoryService.deleteCategory(id).subscribe((data) => {
+        console.log(data);
+        this.getElements();
+      });
+    } else {
+      this.categoryService.deleteSubCategory(id).subscribe((data) => {
+        this.getElements();
+        console.log(data);
+      });
+    }
   }
 }

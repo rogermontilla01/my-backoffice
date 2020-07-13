@@ -8,8 +8,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class FormCategoryComponent implements OnInit {
 
   @Input() categoryData;
+  @Input() subCategoryData;
   @Input() categoryForm;
   @Input() subCategoryForm;
+  @Input() subname;
+  @Input() showAllForms;
 
   @Output() submitFormCategory = new EventEmitter<boolean>()
   @Output() submitFormSubCategory = new EventEmitter<boolean>()

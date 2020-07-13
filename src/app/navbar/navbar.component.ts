@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { StaffService } from '../services/staff.service';
+import { NavbarService } from "../services/navbar.service";
 import { Router } from '@angular/router';
 
 /** @title Responsive sidenav */
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+  stateTitle
 
   showSideNav = false;
 
@@ -48,11 +50,16 @@ export class NavbarComponent implements OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router: Router,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private navBarService: NavbarService,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.navBarService.navState$.subscribe((state)=>{
+      this.stateTitle = state
+    })
 
     this.staffService.isAuthenticate().subscribe((state)=>{
       if(state){

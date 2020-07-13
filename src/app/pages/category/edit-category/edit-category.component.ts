@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
+import { NavbarService } from '../../../services/navbar.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,18 +12,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EditCategoryComponent implements OnInit {
   subname: string;
   categoryData;
-  subcategoryData;
+  subCategoryData;
   categoryForm: FormGroup;
   subCategoryForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     private categoryService: ProductsService,
     private route: Router,
-    private activatedRouted: ActivatedRoute
+    private activatedRouted: ActivatedRoute,
+    private navBarService: NavbarService,
   ) {
+    this.navBarService.setNavBarState('Edit Category')
     //Formulario para categorias
     this.categoryForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
+      category: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', Validators.required],
     });
     //Formulario para Subcategorias
@@ -33,7 +36,8 @@ export class EditCategoryComponent implements OnInit {
     });
   }
 
-  updateCategory() {
+  processCategory(event) {
+    if(event){
     let id = this.activatedRouted.snapshot.paramMap.get('id');
     this.categoryService.updateCategory(id, this.categoryForm.value).subscribe(
       (data) => {
@@ -44,8 +48,10 @@ export class EditCategoryComponent implements OnInit {
       }
     );
   }
+  }
 
-  updateSubCategory() {
+  processSubCategory(event) {
+    if(event){
     let id = this.activatedRouted.snapshot.paramMap.get('id');
     //Ejemplo con error en observable
     this.categoryService.updateSubCategory(id, this.subCategoryForm.value)
@@ -56,7 +62,7 @@ export class EditCategoryComponent implements OnInit {
         (err) => {
           alert(err.error.msg);
         }
-      );
+      );}
   }
 
   ngOnInit(): void {
@@ -74,7 +80,7 @@ export class EditCategoryComponent implements OnInit {
     if (this.subname == undefined) {
       this.categoryService.getCategoryById(id).subscribe((data) => {
         this.categoryData = data;
-        this.categoryForm.get('name').setValue(this.categoryData.name);
+        this.categoryForm.get('category').setValue(this.categoryData.category);
         this.categoryForm.get('description').setValue(this.categoryData.description);
       });
     } else {
@@ -85,9 +91,9 @@ export class EditCategoryComponent implements OnInit {
       })
       //Modificar el formulario
       this.categoryService.getSubCategoryById(id).subscribe(data=>{
-        this.subcategoryData = data;
-        this.subCategoryForm.get('subname').setValue(this.subcategoryData.subname)
-        this.subCategoryForm.get('description').setValue(this.subcategoryData.description)
+        this.subCategoryData = data;
+        this.subCategoryForm.get('subname').setValue(this.subCategoryData.subname)
+        this.subCategoryForm.get('description').setValue(this.subCategoryData.description)
       })
     }
   }
