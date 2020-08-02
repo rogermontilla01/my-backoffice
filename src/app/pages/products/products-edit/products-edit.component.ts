@@ -7,7 +7,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
-const URL = 'http://localhost:3000/products/upload-img/';
+const URL = 'http://localhost:3001/products/upload-img/';
 @Component({
   selector: 'app-products-edit',
   templateUrl: './products-edit.component.html',

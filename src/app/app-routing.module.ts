@@ -12,7 +12,9 @@ import { ViewCategoryComponent } from './pages/category/view-category/view-categ
 import { EditCategoryComponent } from './pages/category/edit-category/edit-category.component';
 import { AuthGuard } from './guards/auth.guard';
 
+
 const routes: Routes = [
+  
   { path: 'login', component: LoginComponent },
   { path: 'register-staff', canActivate:[AuthGuard],component: RegisterStaffComponent },
   { path: 'view-staff', canActivate:[AuthGuard],component: ViewStaffComponent },

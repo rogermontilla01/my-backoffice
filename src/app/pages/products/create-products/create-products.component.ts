@@ -7,7 +7,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
-const URL = 'http://localhost:3000/products/upload-img/';
+const URL = 'http://localhost:3001/products/upload-img/';
 @Component({
   selector: 'app-create-products',
   templateUrl: './create-products.component.html',
@@ -37,7 +37,7 @@ export class CreateProductsComponent implements OnInit {
       sku: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      offert: ['', Validators.required],
+      offert: [''],
       quantity: ['', Validators.required],
       subcategory: ['', Validators.required],
       featured: ['true', Validators.required],
