@@ -1,0 +1,23 @@
+.container {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.options{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.title {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.text-box{
+    background-color: #eeeeee;
+    min-height: 300px;
+    border-radius: 5px;
+}

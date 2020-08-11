@@ -1,0 +1,53 @@
+<div>
+  <h3 class="title">{{selectEditor}} Editor</h3>
+</div>
+
+<div class="container">
+  <div *ngIf="selectEditor == 'About'">
+    <quill-editor
+      [styles]="{ height: '200px' }"
+      [modules]="editorModules"
+      (onEditorChanged)="changeEditorAbout($event)"
+    ></quill-editor>
+  </div>
+  <div *ngIf="selectEditor == 'History'">
+    <quill-editor
+      [styles]="{ height: '200px' }"
+      [modules]="editorModules"
+      (onEditorChanged)="changeEditorHistory($event)"
+    ></quill-editor>
+  </div>
+  <div class="options">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Select Editor</mat-label>
+        <mat-select [(value)]="selectEditor">
+            <mat-option value="About">About</mat-option>
+            <mat-option value="History">History</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <button (click)="submitPage()" mat-raised-button color="primary">
+        Submit
+      </button>
+    </div>
+  </div>
+  <div>
+    <h3 class="title">{{selectEditor}} Output</h3>
+    <div *ngIf="selectEditor == 'About'" class="text-box">
+      <quill-view
+        [content]="editorAbout"
+        format="text"
+        theme="snow"
+      ></quill-view>
+    </div>
+    <div *ngIf="selectEditor == 'History'" class="text-box">
+        <quill-view
+          [content]="editorHistory"
+          format="text"
+          theme="snow"
+        ></quill-view>
+      </div>
+  </div>
+</div>

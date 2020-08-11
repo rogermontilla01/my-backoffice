@@ -42,6 +42,13 @@ export class NavbarComponent implements OnDestroy {
         { path: '/view-category', name: 'Category List' },
       ],
     },
+    {
+      category: 'About',
+      expaded: false,
+      datos: [
+        { path: '/static-edit', name: 'Edit About' },
+      ],
+    },
   ];
 
   private _mobileQueryListener: () => void;

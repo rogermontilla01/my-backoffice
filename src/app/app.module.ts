@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {MatInputModule} from '@angular/material/input';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,13 +26,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProductsEditComponent } from './pages/products/products-edit/products-edit.component';
 import { CreateCategoryComponent } from './pages/category/create-category/create-category.component';
 import { ViewCategoryComponent } from './pages/category/view-category/view-category.component';
-import { EditCategoryComponent } from './pages/category/edit-category/edit-category.component'
-import { FileUploadModule } from "ng2-file-upload";
-import { InterceptorsService } from "./services/interceptors.service";
+import { EditCategoryComponent } from './pages/category/edit-category/edit-category.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { InterceptorsService } from './services/interceptors.service';
 import { FormProductsComponent } from './pages/products/form-products/form-products.component';
 import { FormStaffComponent } from './pages/staff/form-staff/form-staff.component';
 import { FormCategoryComponent } from './pages/category/form-category/form-category.component';
-
+import { StaticComponent } from './pages/static/static.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { FormCategoryComponent } from './pages/category/form-category/form-categ
     FormProductsComponent,
     FormStaffComponent,
     FormCategoryComponent,
+    StaticComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,11 +72,11 @@ import { FormCategoryComponent } from './pages/category/form-category/form-categ
     ReactiveFormsModule,
     NgxDatatableModule,
     FileUploadModule,
-    
+    QuillModule.forRoot(),
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorsService, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorsService, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

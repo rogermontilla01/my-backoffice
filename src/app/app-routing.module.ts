@@ -10,6 +10,7 @@ import { ProductsEditComponent } from './pages/products/products-edit/products-e
 import { CreateCategoryComponent } from './pages/category/create-category/create-category.component';
 import { ViewCategoryComponent } from './pages/category/view-category/view-category.component';
 import { EditCategoryComponent } from './pages/category/edit-category/edit-category.component';
+import { StaticComponent } from './pages/static/static.component'
 import { AuthGuard } from './guards/auth.guard';
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'create-category', canActivate:[AuthGuard],component: CreateCategoryComponent },
   { path: 'view-category', canActivate:[AuthGuard],component: ViewCategoryComponent },
   { path: 'category-edit/:id', canActivate:[AuthGuard],component: EditCategoryComponent },
+  { path: 'static-edit',  canActivate:[AuthGuard], component: StaticComponent},
 
 ];
 
