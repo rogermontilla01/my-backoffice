@@ -16,7 +16,7 @@ export class NavbarComponent implements OnDestroy {
 
   showSideNav = false;
 
-  staticNav = [{ path: '/', name: 'Home' }];
+  staticNav = [{ path: '/', name: 'Home' }, { path: '/static-edit', name: 'Edit Static' }];
   expanNav = [
     {
       category: 'Products',
@@ -42,13 +42,7 @@ export class NavbarComponent implements OnDestroy {
         { path: '/view-category', name: 'Category List' },
       ],
     },
-    {
-      category: 'About',
-      expaded: false,
-      datos: [
-        { path: '/static-edit', name: 'Edit About' },
-      ],
-    },
+   
   ];
 
   private _mobileQueryListener: () => void;

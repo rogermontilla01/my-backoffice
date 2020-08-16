@@ -8,6 +8,8 @@
       [styles]="{ height: '200px' }"
       [modules]="editorModules"
       (onEditorChanged)="changeEditorAbout($event)"
+      (onContentChanged)="changeEditorAbout($event)"
+      (onSelectionChanged)="changeEditorAbout($event)"
     ></quill-editor>
   </div>
   <div *ngIf="selectEditor == 'History'">
@@ -15,6 +17,8 @@
       [styles]="{ height: '200px' }"
       [modules]="editorModules"
       (onEditorChanged)="changeEditorHistory($event)"
+      (onContentChanged)="changeEditorHistory($event)"
+      (onSelectionChanged)="changeEditorHistory($event)"
     ></quill-editor>
   </div>
   <div class="options">

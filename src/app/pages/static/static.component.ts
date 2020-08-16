@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { StaticsService } from '../../services/statics.service';
+import { NavbarService } from '../../services/navbar.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-static',
@@ -8,17 +10,21 @@ import { StaticsService } from '../../services/statics.service';
   styleUrls: ['./static.component.css'],
 })
 export class StaticComponent implements OnInit {
-  editorAbout:string;
-  editorHistory:string;
-  id:string;
-  selectEditor= 'About';
- 
+  editorAbout: string;
+  editorHistory: string;
+  id: string;
+  selectEditor = 'About';
 
-  constructor(private stacticService: StaticsService) {}
+  constructor(
+    private stacticService: StaticsService,
+    private snackBar: MatSnackBar,
+    private navBarService: NavbarService
+  ) {
+    this.navBarService.setNavBarState('Static Page Editor')
+  }
 
   ngOnInit(): void {
     this.stacticService.getPages().subscribe((data) => {
-
       let pagesData = data['data'][0];
       this.id = pagesData._id;
       this.editorAbout = pagesData.about;
@@ -28,19 +34,31 @@ export class StaticComponent implements OnInit {
   }
 
   submitPage() {
-    this.stacticService.updatePage(this.id, {about: this.editorAbout, history: this.editorHistory}).subscribe((data)=>{
-      console.log(data)
-    })
+    this.stacticService
+      .updatePage(this.id, {
+        about: this.editorAbout,
+        history: this.editorHistory,
+      })
+      .subscribe((data) => {
+        console.log(data);
+        this.snackBar.open(data['status'], '', {
+          duration: 2000,
+        });
+      });
   }
 
   changeEditorAbout(event: EditorChangeContent | EditorChangeSelection) {
-    //console.log(' editor got change ', event)
-    this.editorAbout = event['html'];
+    console.log(' editor got change ', event['html']);
+    if (event['html'] != undefined) {
+      this.editorAbout = event['html'];
+    }
   }
 
   changeEditorHistory(event: EditorChangeContent | EditorChangeSelection) {
     //console.log(' editor got change ', event)
-    this.editorHistory = event['html'];
+    if (event['html'] != undefined) {
+      this.editorHistory = event['html'];
+    }
   }
 
   editorModules = {
