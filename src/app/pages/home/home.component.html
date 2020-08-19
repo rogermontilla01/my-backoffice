@@ -1,0 +1,21 @@
+<div class="container">
+  <ngx-datatable
+    class="material"
+    [rows]="rows"
+    [columns]="[
+      { name: 'User Name', prop: 'username' },
+      { name: 'User' },
+      { name: 'Product', prop: 'prodname' },
+      { name: 'Price', prop: 'price' },
+      { name: 'Quantity' },
+      { name: 'Date', prop: 'date' },
+      { name: 'Total' }
+    ]"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    rowHeight="auto"
+    [limit]="5"
+  >
+  </ngx-datatable>
+</div>

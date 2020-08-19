@@ -34,6 +34,7 @@ import { FormStaffComponent } from './pages/staff/form-staff/form-staff.componen
 import { FormCategoryComponent } from './pages/category/form-category/form-category.component';
 import { StaticComponent } from './pages/static/static.component';
 import { QuillModule } from 'ngx-quill';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { QuillModule } from 'ngx-quill';
     FormStaffComponent,
     FormCategoryComponent,
     StaticComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

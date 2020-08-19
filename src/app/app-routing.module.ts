@@ -12,10 +12,12 @@ import { ViewCategoryComponent } from './pages/category/view-category/view-categ
 import { EditCategoryComponent } from './pages/category/edit-category/edit-category.component';
 import { StaticComponent } from './pages/static/static.component'
 import { AuthGuard } from './guards/auth.guard';
+import { HomeComponent } from './pages/home/home.component';
 
 
 const routes: Routes = [
   
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register-staff', canActivate:[AuthGuard],component: RegisterStaffComponent },
   { path: 'view-staff', canActivate:[AuthGuard],component: ViewStaffComponent },

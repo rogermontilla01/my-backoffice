@@ -45,6 +45,7 @@ export class ProductsListComponent implements OnInit {
 
   setPage(pageInfo) {
     this.ProductsService.getAllProducts(pageInfo).subscribe((data) => {
+      console.log(data)
       //REgistros de productos (Informacion)
       this.rows = data['docs'];
       //Cantidad total de productos
