@@ -18,7 +18,7 @@ export class ProductsService {
   }
 
   getProdById(id){
-    return this.http.get(environment.endpoint + '/products/' + id);
+    return this.http.get(environment.endpoint + '/products/by-id/' + id);
   }
 
   getAllProducts(pageInfo=null) {

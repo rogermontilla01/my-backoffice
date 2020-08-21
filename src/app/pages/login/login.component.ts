@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StaffService } from '../../services/staff.service';
-
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-login',
@@ -11,35 +11,40 @@ import { StaffService } from '../../services/staff.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  
   loginForm;
 
-  constructor(private _fb: FormBuilder, private _auth: StaffService, private _router: Router, private _snackBar: MatSnackBar) {
+  constructor(
+    private _fb: FormBuilder,
+    private _auth: StaffService,
+    private _router: Router,
+    private _snackBar: MatSnackBar,
+    private navBarService: NavbarService
+  ) {
     this.loginForm = this._fb.group({
       user: ['', Validators.required],
       password: ['', Validators.required],
     });
+
+    this.navBarService.setNavBarState('Login');
   }
 
-  login(){
-    this._auth.Login(this.loginForm.value).subscribe(data=>{
-      if(data['token'] === undefined){
+  login() {
+    this._auth.Login(this.loginForm.value).subscribe((data) => {
+      if (data['token'] === undefined) {
         this._snackBar.open('Authentication failed', 'Please try again', {
-          duration: 2000
-        })
-        this._router.navigate(['/login'])
-      }else{
-        localStorage.setItem('token', data['token'])
-        this._auth.authenticate()
+          duration: 2000,
+        });
+        this._router.navigate(['/login']);
+      } else {
+        localStorage.setItem('token', data['token']);
+        this._auth.authenticate();
         this._snackBar.open('Bienvenido/a', 'MyEcommerce', {
-          duration: 2000
-        })
+          duration: 2000,
+        });
 
-        this._router.navigate(['/'])
+        this._router.navigate(['/']);
       }
-      
-      
-    })
+    });
   }
 
   ngOnInit(): void {}
